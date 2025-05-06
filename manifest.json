@@ -1,0 +1,9 @@
+{
+    "name": "Chat_History",
+    "version_number": "1.0.0",
+    "website_url": "https://github.com/Ayloonah/Erenshor-Chat-History-Mod",
+    "description": "Allows you to access your last 20 chat messages through the up and down arrows so you don't have to type the same things over and over.",
+    "dependencies": [
+        "BepInEx-BepInExPack-5.4.2100"
+    ]
+}
