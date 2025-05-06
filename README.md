@@ -1,8 +1,5 @@
 # Erenshor - Chat History Mod
-Allows you to access your chat message history so you don't have to type the same things over and over.
-
-## Features
-- Allows you to use the arrow up and the arrow down keys to access your last 20 chat messages.
+Allows you to access your last 20 chat messages through the up and down arrows so you don't have to type the same things over and over.
 
 ## Installation
 - Requires [BepInEx](https://github.com/BepInEx/BepInEx)
