@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +11,7 @@ namespace erenshor_chat_history_mod
         private List<string> chatInputList = new List<string>();
         private int currentIndex = -1;
         private string sceneName;
+        private TypeText chatBox; 
 
         public void Update()
         {
@@ -21,8 +22,11 @@ namespace erenshor_chat_history_mod
                 return;
             }
             
-            // Finding the current chat box instance
-            TypeText chatBox = UnityEngine.Object.FindObjectOfType<TypeText>();
+            // Finding the current chat box instance once
+            if (chatBox == null) 
+            {
+                chatBox = UnityEngine.Object.FindObjectOfType<TypeText>();
+            }
 
             // Tracking button pressed
             bool isArrowUpPressed = Input.GetKeyDown(KeyCode.UpArrow);
@@ -60,7 +64,6 @@ namespace erenshor_chat_history_mod
             // What to do if the down arrow is pressed and the list is not empty
             if (isArrowDownPressed && (chatInputList.Count > 0))
             {
-                Mod.Log.LogMessage("Arrow down detected.");
                 if (currentIndex == -1)
                 {
                     chatBox.typed.text = "";
