@@ -3,5 +3,5 @@ Allows you to access your last 20 chat messages through the up and down arrows s
 
 ## Installation
 - Requires [BepInEx](https://github.com/BepInEx/BepInEx)
-- Download `Ayloonah.Erenshor-Chat-History-Mod.dll` [Latest Release](https://github.com/Ayloonah/Erenshor-Chat-History-Mod/releases/tag/v1.0.1)
+- Download `Ayloonah.Erenshor-Chat-History-Mod.dll` [Latest Release](https://github.com/Ayloonah/Erenshor-Chat-History-Mod/releases)
 - Place the DLL inside your `BepInEx/Plugins` Directory
