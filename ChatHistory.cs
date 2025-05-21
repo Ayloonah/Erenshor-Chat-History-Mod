@@ -1,39 +1,61 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace erenshor_chat_history_mod
 {
-    public class ChatHistory : MonoBehaviour
-    {   
+    public class ChatHistory : MonoBehaviour {   
         // Creating a list to store sent messages Strings in
         private List<string> chatInputList = new List<string>();
         private int currentIndex = -1;
         private string sceneName;
-        private TypeText chatBox; 
+        private TypeText chatBox;
 
+        // When the mod loads, the chatbox object is updated based on scene name:
+        private void Awake() {
+            sceneName = SceneManager.GetActiveScene().name;
+            UpdateChatBoxForScene(sceneName);
+        }
+
+        private void OnEnable() {
+            SceneManager.activeSceneChanged += OnSceneChanged;
+        }
+
+        private void OnDisable() {
+            SceneManager.activeSceneChanged -= OnSceneChanged;
+        }
+
+        // When the scene changes, the chatbox object is updated based on scene name:
+        private void OnSceneChanged(Scene oldScene, Scene newScene) {
+            sceneName = newScene.name;
+            UpdateChatBoxForScene(sceneName);
+        }
+
+        // If the scene isn't Menu or LoadScene, finds the chatbox object:
+        private void UpdateChatBoxForScene(string scene) {
+            if (scene == "Menu" || scene == "LoadScene") {
+                chatBox = null;
+            } else {
+                chatBox = UnityEngine.Object.FindObjectOfType<TypeText>();
+            }
+        }
+
+        // Handles the chat input (meat and potatoes of the mod):
         public void Update()
         {
-            // Making sure we are in a scene in which there is a chat box
-            sceneName = SceneManager.GetActiveScene().name;
-            if (sceneName == "Menu" || sceneName == "LoadScene")
-            {
+            // Checking to see if we have a chatbox cached:
+            if (chatBox == null) {
                 return;
-            }
-            
-            // Finding the current chat box instance once
-            if (chatBox == null) 
-            {
-                chatBox = UnityEngine.Object.FindObjectOfType<TypeText>();
             }
 
             // Tracking button pressed
             bool isArrowUpPressed = Input.GetKeyDown(KeyCode.UpArrow);
             bool isArrowDownPressed = Input.GetKeyDown(KeyCode.DownArrow);
-            
+            bool isReturnPressed = Input.GetKeyDown(KeyCode.Return);
+
             // Capturing the player input after enter is pressed
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (isReturnPressed)
             {
                 // If the input is not empty, add it to the list, storing a maximum of 20
                 string currentInputString = chatBox.typed.text.Trim();
@@ -80,7 +102,7 @@ namespace erenshor_chat_history_mod
             }
 
             // If the player presses enter, the current index is reset to -1
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (isReturnPressed)
             {
                 currentIndex = -1;
             }
