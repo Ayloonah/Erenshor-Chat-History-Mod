@@ -1,4 +1,4 @@
-# Erenshor - Chat History Mod
+# (ABANDONED/DEPRECATED) Erenshor - Chat History Mod
 Allows you to access your last 20 chat messages through the up and down arrows so you don't have to type the same things over and over.
 
 ## Installation
